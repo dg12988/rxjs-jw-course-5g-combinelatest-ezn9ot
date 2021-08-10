@@ -9,6 +9,18 @@ const conversionInputEvent$ = fromEvent(conversionDropdown, 'input');
 
 combineLatest([temperatureInputEvent$, conversionInputEvent$]).subscribe(
   ([temperatureInputEvent, conversionInputEvent]) => {
+    const temperature =  Number(temperatureInputEvent.target['value']);
+    const conversion = conversionInputEvent.target['value'];
+
+    let result: number;
+    if(conversion === 'f-to-c'){
+      result = (temperature - 32) * 5/9;  
+    } else if (conversion === 'c-to-f'){
+      result = temperature * 9/5 + 32;
+    }
+
+    resultText.innerText = String(result);
+
     console.log(
       temperatureInputEvent.target['value'],
       conversionInputEvent.target['value']
